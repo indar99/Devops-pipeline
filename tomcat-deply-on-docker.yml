@@ -1,0 +1,18 @@
+---
+
+- hosts: all
+
+  tasks:
+
+  - name: deploy tomcat on docker image
+    shell: docker pull tomcat:latest
+    args:
+      chdir: /home/dockeradmin/
+
+  - name: application container
+    shell: docker run -itd --name tomcat-container -p 8080:8080 tomcat:latest
+    ignore_errors: yes
+
+  - name: verfiy container state
+    shell: docker ps
+
